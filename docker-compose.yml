@@ -1,12 +1,30 @@
 version: '3.9'
 
 services:
+  db:
+    image: mysql:8.0.25
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: recipe_box
+      MYSQL_ROOT_PASSWORD: bloodyroots
+
   web:
     build: .
-    command: bash -c "python manage.py makemigrations
-                      && python manage.py migrate
-                      && python manage.py runserver 0.0.0.0:8080"
+    command: bash -c "sleep 15s
+      && python manage.py createsuperuser --noinput --username shaphil --email admin@shaphil.me
+      && python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8080"
+    environment: 
+      DJANGO_SUPERUSER_PASSWORD: 123456
     volumes:
       - .:/code
     ports:
       - '8080:8080'
+    depends_on:
+      - db
