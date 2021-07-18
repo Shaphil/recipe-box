@@ -8,6 +8,11 @@
 .idea/**
 
 
+# Custom files and folders
+data/
+data/**
+
+
 ### Django ###
 *.log
 *.pot
