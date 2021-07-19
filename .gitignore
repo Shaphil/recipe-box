@@ -7,11 +7,11 @@
 .idea
 .idea/**
 
-
 # Custom files and folders
 data/
 data/**
-
+static/
+staticfiles/
 
 ### Django ###
 *.log
