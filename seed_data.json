@@ -1,0 +1,21 @@
+[
+    {
+      "model": "auth.user",
+      "pk": 1,
+      "fields": {
+        "password": "pbkdf2_sha256$260000$XMY0ziWbyTlDTwvbrl8P12$tRBUsAwKJFmNSMz49CF6RkS/YAzzmMY4nteqDOdMeGc=",
+        "last_login": "2021-07-19T13:55:27.598Z",
+        "is_superuser": true,
+        "username": "shaphil",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@shaphil.me",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2021-07-19T13:54:48.544Z",
+        "groups": [],
+        "user_permissions": []
+      }
+    }
+  ]
+  
