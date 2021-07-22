@@ -36,13 +36,17 @@ class Unit(models.Model):
 
 
 class Ingredients(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Ingredients'
+
     name = models.CharField(max_length=128, blank=False, null=False)
     article_number = models.CharField(max_length=16, blank=True, null=True)
     unit = models.ForeignKey(
         Unit, null=True, blank=True, on_delete=models.SET_NULL)
     unit_amount = models.FloatField(blank=True, null=True)
     price_per_unit_amount = models.DecimalField(
-        max_digits=10, decimal_places=2, blank=True, null=True)
+        max_digits=10, decimal_places=3, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -57,6 +61,10 @@ class Recipe(models.Model):
 
 
 class RecipeIngredients(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Recipe Ingredients'
+
     recipe = models.ForeignKey(
         Recipe, null=False, blank=False, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(
@@ -85,3 +93,6 @@ class RecipeIngredients(models.Model):
                 self.ingredient.price_per_unit_amount
 
         return _price
+
+    def __str__(self):
+        return f'{self.ingredient.name} for {self.recipe.name[:16]}...'
