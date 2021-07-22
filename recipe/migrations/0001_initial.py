@@ -2,7 +2,6 @@
 
 
 from django.db import migrations, models
-from recipe.models import TimeStampMixin
 
 
 class Migration(migrations.Migration):
@@ -24,6 +23,6 @@ class Migration(migrations.Migration):
                 ('multiplier', models.FloatField(null=True)),
                 ('symbol', models.CharField(max_length=16)),
             ],
-            bases=(models.Model, TimeStampMixin),
+            bases=(models.Model,),
         ),
     ]
