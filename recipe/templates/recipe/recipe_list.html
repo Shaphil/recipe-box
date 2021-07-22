@@ -5,9 +5,8 @@
 {% block jumboheader %}Home{% endblock %}
 
 {% block content %}
-  <div class="w-25"></div>
-  <div class="w-50 mx-auto">
-    <h3>Welcome to Recipe Box</h3>
-  </div>
-  <div class="w-25"></div>
+  {% for recipe in recipe_list %}
+  <h2><a href=#>{{ recipe.name }}</a></h2>
+  <p>{{ recipe.description | truncatewords:50 }}</p>
+  {% endfor %}
 {% endblock %}

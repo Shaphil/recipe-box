@@ -1,5 +1,9 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView
+
+from .models import Recipe
 
 
-class HomeView(TemplateView):
-    template_name = 'recipe/index.html'
+class RecipesList(ListView):
+    """Lists all recipes"""
+
+    queryset = Recipe.objects.all()
