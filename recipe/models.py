@@ -54,3 +54,34 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f'{self.name[:16]}...'
+
+
+class RecipeIngredients(models.Model):
+    recipe = models.ForeignKey(
+        Recipe, null=False, blank=False, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(
+        Ingredients, null=False, blank=False, on_delete=models.CASCADE)
+    unit = models.ForeignKey(
+        Unit, null=True, blank=True, on_delete=models.SET_NULL)
+    amount = models.FloatField(blank=True, null=True)
+
+    @property
+    def price(self):
+        _price = None
+        if self.ingredient.unit.unit_type == self.unit.unit_type:
+            _amount = self.amount
+            _unit_amount = self.ingredient.unit_amount
+            if self.ingredient.unit.symbol != self.unit.symbol:
+                default_unit = Unit.objects.filter(
+                    unit_type=self.unit.unit_type).filter(is_default=True)[0]
+
+                if not self.ingredient.unit.is_default:
+                    _unit_amount = self.ingredient.unit_amount * default_unit.multiplier
+
+                if not self.unit.is_default:
+                    _amount = self.amount * default_unit.multiplier
+
+            _price = Decimal(str(_amount / _unit_amount)) * \
+                self.ingredient.price_per_unit_amount
+
+        return _price
