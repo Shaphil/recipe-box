@@ -2,41 +2,7 @@
 
 
 from django.db import migrations, models
-from recipe.models import TimeStampMixin, Unit
-
-
-def create_units(apps, schema_editor):
-    """Creates the base units."""
-
-    units = [
-        {
-            'name': 'Kilogram',
-            'unit_type': Unit.unit_choices[2][0],
-            'multiplier': 1000.0,
-            'symbol': 'kg'
-        },
-        {
-            'name': 'Gram',
-            'unit_type': Unit.unit_choices[2][0],
-            'multiplier': 1.0,
-            'symbol': 'g'
-        },
-        {
-            'name': 'Liter',
-            'unit_type': Unit.unit_choices[1][0],
-            'multiplier': 1.0,
-            'symbol': 'l'
-        },
-        {
-            'name': 'Centiliter',
-            'unit_type': Unit.unit_choices[1][0],
-            'multiplier': 100.0,
-            'symbol': 'cl'
-        },
-    ]
-
-    for unit in units:
-        Unit.objects.create(**unit)
+from recipe.models import TimeStampMixin
 
 
 class Migration(migrations.Migration):
@@ -60,5 +26,4 @@ class Migration(migrations.Migration):
             ],
             bases=(models.Model, TimeStampMixin),
         ),
-        migrations.RunPython(create_units),
     ]
