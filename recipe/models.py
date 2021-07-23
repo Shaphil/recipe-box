@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import models
+from django.urls import reverse
 
 
 class Unit(models.Model):
@@ -55,9 +56,14 @@ class Ingredients(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=256, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    updated_at = models.DateTimeField(null=True, blank=True, auto_now=True)
 
     def __str__(self):
         return f'{self.name[:16]}...'
+
+    def get_absolute_url(self):
+        return reverse('recipe-detail', kwargs={'pk': self.id})
 
 
 class RecipeIngredients(models.Model):
@@ -75,8 +81,8 @@ class RecipeIngredients(models.Model):
 
     @property
     def price(self):
-        _price = None
-        if self.ingredient.unit.unit_type == self.unit.unit_type:
+        _price = Decimal('0.0')
+        if self.unit is not None and self.ingredient.unit.unit_type == self.unit.unit_type:
             _amount = self.amount
             _unit_amount = self.ingredient.unit_amount
             if self.ingredient.unit.symbol != self.unit.symbol:
