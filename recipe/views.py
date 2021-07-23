@@ -1,11 +1,12 @@
 from decimal import Decimal
 
 from django.db.models import Q
+from django.forms import inlineformset_factory
+from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.shortcuts import render
 
-from .forms import RecipeForm
+from .forms import RecipeForm, RecipeIngredientsForm
 from .models import Ingredients, Recipe, RecipeIngredients
 
 
@@ -50,14 +51,50 @@ class IngredientsList(ListView):
         ).order_by('name')
 
 
+extra = 5
+ingredient_fields = ('ingredient', 'amount', 'unit',)
+IngredientsFormSet = inlineformset_factory(
+    Recipe, RecipeIngredients, fields=ingredient_fields, extra=extra)
+
+
 class CreateRecipe(CreateView):
-    model = Recipe
-    fields = ('name', 'description',)
+    # fields = ('name', 'description',)
     template_name = 'recipe/recipe_form.html'
 
     def get(self, request, *args, **kwargs):
         recipe_form = RecipeForm()
-        return render(request, self.template_name, {'recipe_form': recipe_form})
+        ingredients_formset = IngredientsFormSet()
+        context = {
+            'recipe_form': recipe_form,
+            'ingredients_formset': ingredients_formset
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            recipe = form.save()
+
+        i = 0
+        while i < extra:
+            ingredient = request.POST.get(
+                f'recipeingredients_set-{i}-ingredient')
+            amount = request.POST.get(f'recipeingredients_set-{i}-amount')
+            unit = request.POST.get(f'recipeingredients_set-{i}-unit')
+
+            if ingredient:
+                ingredient = int(ingredient)
+                amount = float(amount) if amount else 0.0
+                unit = int(unit) if unit else None
+                RecipeIngredients.objects.create(
+                    ingredient_id=ingredient,
+                    recipe=recipe,
+                    unit_id=unit,
+                    amount=amount
+                )
+            i += 1
+
+        return HttpResponseRedirect(recipe.get_absolute_url())
 
 
 class AddIngredients(CreateView):

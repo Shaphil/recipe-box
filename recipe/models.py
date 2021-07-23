@@ -81,8 +81,8 @@ class RecipeIngredients(models.Model):
 
     @property
     def price(self):
-        _price = None
-        if self.ingredient.unit.unit_type == self.unit.unit_type:
+        _price = Decimal('0.0')
+        if self.unit is not None and self.ingredient.unit.unit_type == self.unit.unit_type:
             _amount = self.amount
             _unit_amount = self.ingredient.unit_amount
             if self.ingredient.unit.symbol != self.unit.symbol:
