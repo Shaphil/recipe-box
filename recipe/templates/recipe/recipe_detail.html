@@ -21,20 +21,10 @@
         <a class="nav-item nav-link" href="#"
           >Edit</a
         >
-        <a class="nav-item nav-link" href="#"
-          >Delete</a
-        >
       </div>
     </div>
   </nav>
   <br />
-
-  {% if recipe.image %}
-    <div class="text-center">
-      <img src="{{ recipe.image.url }}" class="img-fluid" alt="not found" />
-    </div>
-    <br /><br />
-  {% endif %}
 
   <h1 class="display-4">{{ recipe.name }}</h1>
 

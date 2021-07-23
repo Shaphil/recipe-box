@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db import models
+from django.urls import reverse
 
 
 class Unit(models.Model):
@@ -60,6 +61,9 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f'{self.name[:16]}...'
+
+    def get_absolute_url(self):
+        return reverse('recipe-detail', kwargs={'pk': self.id})
 
 
 class RecipeIngredients(models.Model):

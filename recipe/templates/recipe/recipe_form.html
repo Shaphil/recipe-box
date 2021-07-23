@@ -2,20 +2,20 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  {% if ingredients %}
-    {{ ingredients.name }}
+  {% if recipe %}
+    {{ recipe.name }}
   {% else %}
-    Add New ingredient
+    Create New recipe
   {% endif %}
 {% endblock %}
 
 {% block jumboheader %}
-  <a href="{% url 'ingredients-list' %}">
+  <a href="{% url 'recipes-list' %}">
     <h1 class="display-4">
-      {% if ingredients %}
-        {{ ingredients.name }}
+      {% if recipe %}
+        {{ recipe.name }}
       {% else %}
-        Add New ingredient
+        Create New recipe
       {% endif %}
     </h1>
   </a>
@@ -25,9 +25,9 @@
   
   <form action="" method="post">
     {% csrf_token %}
-    {{ form | crispy }}
+    {{ recipe_form | crispy }}
     <input class="btn btn-outline-secondary" type="submit" value="Submit">
-    <a href="{% url 'ingredients-list' %}" class="btn btn-outline-danger">
+    <a href="{% url 'recipes-list' %}" class="btn btn-outline-danger">
       Cancel
     </a>
 

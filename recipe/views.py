@@ -3,7 +3,9 @@ from decimal import Decimal
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.shortcuts import render
 
+from .forms import RecipeForm
 from .models import Ingredients, Recipe, RecipeIngredients
 
 
@@ -46,6 +48,16 @@ class IngredientsList(ListView):
         return Ingredients.objects.filter(
             Q(name__icontains=query) | Q(article_number__icontains=query)
         ).order_by('name')
+
+
+class CreateRecipe(CreateView):
+    model = Recipe
+    fields = ('name', 'description',)
+    template_name = 'recipe/recipe_form.html'
+
+    def get(self, request, *args, **kwargs):
+        recipe_form = RecipeForm()
+        return render(request, self.template_name, {'recipe_form': recipe_form})
 
 
 class AddIngredients(CreateView):
