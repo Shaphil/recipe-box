@@ -27,16 +27,9 @@
     {% csrf_token %}
     {{ form | crispy }}
     <input class="btn btn-outline-secondary" type="submit" value="Submit">
-
-    {% if ingredients %}
-      <a href="#" class="btn btn-outline-danger">
-        Cancel
-      </a>
-    {% else %}
-      <a href="{% url 'ingredients-list' %}" class="btn btn-outline-danger">
-        Cancel
-      </a>
-    {% endif %}
+    <a href="{% url 'ingredients-list' %}" class="btn btn-outline-danger">
+      Cancel
+    </a>
 
   </form>
 {% endblock %}

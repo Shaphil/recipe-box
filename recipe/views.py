@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from .models import Ingredients, Recipe, RecipeIngredients
 
@@ -49,6 +49,13 @@ class IngredientsList(ListView):
 
 
 class AddIngredients(CreateView):
+    model = Ingredients
+    fields = ('name', 'article_number', 'unit',
+              'unit_amount', 'price_per_unit_amount')
+    success_url = reverse_lazy('ingredients-list')
+
+
+class EditIngredient(UpdateView):
     model = Ingredients
     fields = ('name', 'article_number', 'unit',
               'unit_amount', 'price_per_unit_amount')

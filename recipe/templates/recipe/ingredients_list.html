@@ -42,7 +42,7 @@
         <td>{{ ingredient.unit_amount }} {{ ingredient.unit }}</td>
         <td>{{ ingredient.price_per_unit_amount }}</td>
         <td>
-          <a href="#" class="btn btn-secondary">
+          <a href="{% url 'edit-ingredient' ingredient.id %}" class="btn btn-secondary">
             Edit
           </a>
         </td>
