@@ -1,21 +1,247 @@
 [
-    {
-      "model": "auth.user",
-      "pk": 1,
-      "fields": {
-        "password": "pbkdf2_sha256$260000$XMY0ziWbyTlDTwvbrl8P12$tRBUsAwKJFmNSMz49CF6RkS/YAzzmMY4nteqDOdMeGc=",
-        "last_login": "2021-07-19T13:55:27.598Z",
-        "is_superuser": true,
-        "username": "shaphil",
-        "first_name": "",
-        "last_name": "",
-        "email": "admin@shaphil.me",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-07-19T13:54:48.544Z",
-        "groups": [],
-        "user_permissions": []
-      }
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$XMY0ziWbyTlDTwvbrl8P12$tRBUsAwKJFmNSMz49CF6RkS/YAzzmMY4nteqDOdMeGc=",
+      "last_login": "2021-07-19T13:55:27.598Z",
+      "is_superuser": true,
+      "username": "shaphil",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@shaphil.me",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-07-19T13:54:48.544Z",
+      "groups": [],
+      "user_permissions": []
     }
-  ]
-  
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 1,
+    "fields": {
+      "name": "Milk",
+      "article_number": "dairy-01",
+      "unit": 3,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "1.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 2,
+    "fields": {
+      "name": "Carrots",
+      "article_number": "veg-01",
+      "unit": 1,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "0.750"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 3,
+    "fields": {
+      "name": "Oranges",
+      "article_number": "fruits-01",
+      "unit": 1,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "0.800"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 4,
+    "fields": {
+      "name": "Flour",
+      "article_number": "baking-01",
+      "unit": 1,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "0.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 5,
+    "fields": {
+      "name": "Eggs",
+      "article_number": "baking-01",
+      "unit": 2,
+      "unit_amount": 250.0,
+      "price_per_unit_amount": "1.200"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 6,
+    "fields": {
+      "name": "Cheese",
+      "article_number": "dairy-01",
+      "unit": 1,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "3.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 7,
+    "fields": {
+      "name": "Citric Acid",
+      "article_number": "other-01",
+      "unit": 4,
+      "unit_amount": 5.0,
+      "price_per_unit_amount": "0.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 8,
+    "fields": {
+      "name": "Lemon",
+      "article_number": "fruits-01",
+      "unit": 1,
+      "unit_amount": 1.0,
+      "price_per_unit_amount": "0.500"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 9,
+    "fields": {
+      "name": "Lime Juice",
+      "article_number": "fruits-01",
+      "unit": 4,
+      "unit_amount": 10.0,
+      "price_per_unit_amount": "0.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 10,
+    "fields": {
+      "name": "Coriander Leaves",
+      "article_number": "spices-01",
+      "unit": 2,
+      "unit_amount": 10.0,
+      "price_per_unit_amount": "0.100"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 11,
+    "fields": {
+      "name": "Black Pepper",
+      "article_number": "spices-01",
+      "unit": 2,
+      "unit_amount": 50.0,
+      "price_per_unit_amount": "0.250"
+    }
+  },
+  {
+    "model": "recipe.ingredients",
+    "pk": 12,
+    "fields": {
+      "name": "Bell Pepper",
+      "article_number": "veg-01",
+      "unit": 1,
+      "unit_amount": 0.5,
+      "price_per_unit_amount": "0.500"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 1,
+    "fields": {
+      "name": "Carrot Cake",
+      "description": "Mix items",
+      "created_at": "2021-07-23T10:03:51.487Z",
+      "updated_at": "2021-07-23T10:03:51.532Z"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 2,
+    "fields": {
+      "name": "Orange Pie",
+      "description": "",
+      "created_at": "2021-07-23T10:03:51.487Z",
+      "updated_at": "2021-07-23T10:03:51.532Z"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 3,
+    "fields": {
+      "name": "Cheese Cake",
+      "description": "Add cheese and flour. Mix properly.",
+      "created_at": "2021-07-23T10:14:51.689Z",
+      "updated_at": "2021-07-23T10:14:51.689Z"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 4,
+    "fields": {
+      "name": "Apple Pie",
+      "description": "",
+      "created_at": "2021-07-23T10:15:02.456Z",
+      "updated_at": "2021-07-23T10:15:02.456Z"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 5,
+    "fields": {
+      "name": "Apple Jam",
+      "description": "",
+      "created_at": "2021-07-23T10:15:10.076Z",
+      "updated_at": "2021-07-23T10:15:10.076Z"
+    }
+  },
+  {
+    "model": "recipe.recipe",
+    "pk": 6,
+    "fields": {
+      "name": "Pudding",
+      "description": "",
+      "created_at": "2021-07-23T10:15:20.058Z",
+      "updated_at": "2021-07-23T10:15:20.058Z"
+    }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 1,
+    "fields": { "recipe": 1, "ingredient": 1, "unit": 4, "amount": 250.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 2,
+    "fields": { "recipe": 1, "ingredient": 2, "unit": 2, "amount": 500.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 3,
+    "fields": { "recipe": 2, "ingredient": 1, "unit": 3, "amount": 2.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 4,
+    "fields": { "recipe": 2, "ingredient": 4, "unit": 2, "amount": 250.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 5,
+    "fields": { "recipe": 2, "ingredient": 3, "unit": 2, "amount": 350.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 6,
+    "fields": { "recipe": 6, "ingredient": 1, "unit": 3, "amount": 1.0 }
+  },
+  {
+    "model": "recipe.recipeingredients",
+    "pk": 7,
+    "fields": { "recipe": 6, "ingredient": 5, "unit": 2, "amount": 100.0 }
+  }
+]

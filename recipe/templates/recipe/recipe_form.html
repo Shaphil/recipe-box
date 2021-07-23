@@ -1,0 +1,45 @@
+{% extends "base_jumbo.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if recipe %}
+    Update {{ recipe.name }}
+  {% else %}
+    Create New recipe
+  {% endif %}
+{% endblock %}
+
+{% block jumboheader %}
+  <a href="{% url 'recipes-list' %}">
+    <h1 class="display-4">
+      {% if recipe %}
+        Update {{ recipe.name }}
+      {% else %}
+        Create New recipe
+      {% endif %}
+    </h1>
+  </a>
+{% endblock %}
+
+{% block content %}
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ recipe_form | crispy }}
+    {% for ingredients_form in ingredients_formset %}
+      {{ ingredients_form | crispy }}
+      {% for hidden in ingredients_form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+      <hr>
+    {% endfor %}
+    {% for hidden_set in ingredients_formset.hidden_fields %}
+        {{ hidden_set }}
+      {% endfor %}
+    <input class="btn btn-outline-secondary" type="submit" value="Submit">
+    <a href="{% url 'recipes-list' %}" class="btn btn-outline-danger">
+      Cancel
+    </a>
+
+  </form>
+{% endblock %}

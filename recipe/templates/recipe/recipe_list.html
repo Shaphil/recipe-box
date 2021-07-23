@@ -1,0 +1,26 @@
+{% extends "base_jumbo.html" %}
+
+{% block title %}Recipe Box - Home{% endblock %}
+
+{% block jumboheader %}
+  <h1 class="display-4">Recipe Box</h1>
+  <p class="lead">
+    Delicious Recipes
+  </p>
+  <a href="{% url 'create-recipe' %}" class="btn btn-outline-secondary">
+    New Recipe
+  </a>
+  <a href="{% url 'ingredients-list' %}" class="btn btn-secondary">
+    Ingredients
+  </a>
+{% endblock %}
+
+{% block content %}
+  {% for recipe in recipe_list %}
+    <h2><a href="{% url 'recipe-detail' recipe.id %}">{{ recipe.name }}</a></h2>
+    <p>{{ recipe.description | truncatewords:50 }}</p>
+    <small>{{ recipe.created_at }}</small>
+    <hr>
+  {% endfor %}
+
+{% endblock %}
