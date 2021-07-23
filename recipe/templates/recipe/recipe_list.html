@@ -2,12 +2,60 @@
 
 {% block title %}Recipe Box - Home{% endblock %}
 
-{% block jumboheader %}Home{% endblock %}
+{% block jumboheader %}
+  <h1 class="display-4">Recipe Box</h1>
+  <p class="lead">
+    Delicious Recipes
+  </p>
+  <a href="#" class="btn btn-outline-secondary">
+    New Recipe
+  </a>
+  <a href="#" class="btn btn-secondary">
+    Ingredients
+  </a>
+{% endblock %}
 
 {% block content %}
   {% for recipe in recipe_list %}
     <h2><a href="{% url 'recipe-detail' recipe.id %}">{{ recipe.name }}</a></h2>
     <p>{{ recipe.description | truncatewords:50 }}</p>
+    <small>{{ recipe.created_at }}</small>
     <hr>
   {% endfor %}
+
+  {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="page-item active">
+              <span class="page-link">{{ i }} <span class="sr-only">(current)</span> </span>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <span class="page-link">&raquo;</span>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
 {% endblock %}

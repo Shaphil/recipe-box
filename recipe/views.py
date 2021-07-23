@@ -8,7 +8,8 @@ from decimal import Decimal
 class RecipesList(ListView):
     """Lists all recipes"""
 
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.all().order_by('-created_at')
+    paginate_by = 5
 
 
 class RecipeDetail(DetailView):
