@@ -6,7 +6,8 @@
 
 {% block content %}
   {% for recipe in recipe_list %}
-  <h2><a href=#>{{ recipe.name }}</a></h2>
-  <p>{{ recipe.description | truncatewords:50 }}</p>
+    <h2><a href=#>{{ recipe.name }}</a></h2>
+    <p>{{ recipe.description | truncatewords:50 }}</p>
+    <hr>
   {% endfor %}
 {% endblock %}
