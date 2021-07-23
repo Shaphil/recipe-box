@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'recipe_box',
         'USER': 'root',
-        'PASSWORD': 'bloodyroots',
+        'PASSWORD': 'roots',
         'HOST': 'db',
         'PORT': 3306
     }
