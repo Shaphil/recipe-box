@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{{ recipe.name }}{% endblock %}
+{% block content %}
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'recipes-list' %}">Recipe Box</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#"
+          >Edit</a
+        >
+        <a class="nav-item nav-link" href="#"
+          >Delete</a
+        >
+      </div>
+    </div>
+  </nav>
+  <br />
+
+  {% if recipe.image %}
+    <div class="text-center">
+      <img src="{{ recipe.image.url }}" class="img-fluid" alt="not found" />
+    </div>
+    <br /><br />
+  {% endif %}
+
+  <h1 class="display-4">{{ recipe.name }}</h1>
+
+  <h3>Instructions</h3>
+  {% if recipe.description %}
+    <p>{{ recipe.description }}</p>
+  {% else %}
+    <p>Not available.</p>
+  {% endif %}
+
+  <h3>Ingredients</h3>
+  <ul>
+    {% for ingredient in ingredients %}
+      <li>{{ ingredient.ingredient.name }} - {{ ingredient.amount }}{{ingredient.unit.symbol}} - €{{ ingredient.price|floatformat:2 }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Total cost</h3>
+  <p>Total cost of this recipe is € {{ total_price }}</p>
+{% endblock %}
