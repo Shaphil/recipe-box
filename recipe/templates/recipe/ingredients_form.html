@@ -1,0 +1,42 @@
+{% extends "base_jumbo.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if ingredients %}
+    {{ ingredients.name }}
+  {% else %}
+    Add New ingredient
+  {% endif %}
+{% endblock %}
+
+{% block jumboheader %}
+  <a href="{% url 'ingredients-list' %}">
+    <h1 class="display-4">
+      {% if ingredients %}
+        {{ ingredients.name }}
+      {% else %}
+        Add New ingredient
+      {% endif %}
+    </h1>
+  </a>
+{% endblock %}
+
+{% block content %}
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <input class="btn btn-outline-secondary" type="submit" value="Submit">
+
+    {% if ingredients %}
+      <a href="#" class="btn btn-outline-danger">
+        Cancel
+      </a>
+    {% else %}
+      <a href="{% url 'ingredients-list' %}" class="btn btn-outline-danger">
+        Cancel
+      </a>
+    {% endif %}
+
+  </form>
+{% endblock %}
