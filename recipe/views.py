@@ -1,14 +1,15 @@
-from django.views.generic import ListView, DetailView
-
-from .models import Recipe, RecipeIngredients
-
 from decimal import Decimal
+
+from django.db.models import Q
+from django.views.generic import DetailView, ListView
+
+from .models import Ingredients, Recipe, RecipeIngredients
 
 
 class RecipesList(ListView):
     """Lists all recipes"""
 
-    queryset = Recipe.objects.all().order_by('-created_at')
+    queryset = Recipe.objects.order_by('-created_at')
     paginate_by = 5
 
 
@@ -30,3 +31,17 @@ class RecipeDetail(DetailView):
         context['total_price'] = round(total_price, 2)
 
         return context
+
+
+class IngredientsList(ListView):
+    queryset = Ingredients.objects.order_by('name')
+    paginate_by = 10
+
+    def get_queryset(self):
+        query = self.request.GET.get('query', None)
+        if query is None:
+            return super().get_queryset()
+
+        return Ingredients.objects.filter(
+            Q(name__icontains=query) | Q(article_number__icontains=query)
+        ).order_by('name')
