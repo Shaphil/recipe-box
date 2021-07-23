@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if recipe %}
-    {{ recipe.name }}
+    Update {{ recipe.name }}
   {% else %}
     Create New recipe
   {% endif %}
@@ -13,7 +13,7 @@
   <a href="{% url 'recipes-list' %}">
     <h1 class="display-4">
       {% if recipe %}
-        {{ recipe.name }}
+        Update {{ recipe.name }}
       {% else %}
         Create New recipe
       {% endif %}

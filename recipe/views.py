@@ -109,6 +109,7 @@ class UpdateRecipe(UpdateView):
         recipe_form = RecipeForm(initial=model_to_dict(recipe))
         ingredients_formset = IngredientsFormSet(initial=ingredients)
         context = {
+            'recipe': recipe,
             'recipe_form': recipe_form,
             'ingredients_formset': ingredients_formset
         }

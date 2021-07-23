@@ -3,7 +3,7 @@
 
 {% block title %}
   {% if ingredients %}
-    {{ ingredients.name }}
+    Edit {{ ingredients.name }}
   {% else %}
     Add New ingredient
   {% endif %}
@@ -13,7 +13,7 @@
   <a href="{% url 'ingredients-list' %}">
     <h1 class="display-4">
       {% if ingredients %}
-        {{ ingredients.name }}
+        Edit {{ ingredients.name }}
       {% else %}
         Add New ingredient
       {% endif %}
