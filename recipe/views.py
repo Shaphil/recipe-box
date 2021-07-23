@@ -2,11 +2,12 @@ from decimal import Decimal
 
 from django.db.models import Q
 from django.forms import inlineformset_factory
+from django.forms.models import model_to_dict
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from .forms import RecipeForm, RecipeIngredientsForm
+from .forms import RecipeForm
 from .models import Ingredients, Recipe, RecipeIngredients
 
 
@@ -58,7 +59,6 @@ IngredientsFormSet = inlineformset_factory(
 
 
 class CreateRecipe(CreateView):
-    # fields = ('name', 'description',)
     template_name = 'recipe/recipe_form.html'
 
     def get(self, request, *args, **kwargs):
@@ -92,6 +92,66 @@ class CreateRecipe(CreateView):
                     unit_id=unit,
                     amount=amount
                 )
+            i += 1
+
+        return HttpResponseRedirect(recipe.get_absolute_url())
+
+
+class UpdateRecipe(UpdateView):
+    model = Recipe
+    fields = ('name', 'description',)
+    template_name = 'recipe/recipe_form.html'
+
+    def get(self, request, *args, **kwargs):
+        recipe = self.get_object()
+        _ingredients = RecipeIngredients.objects.filter(recipe=recipe)
+        ingredients = [model_to_dict(item) for item in _ingredients]
+        recipe_form = RecipeForm(initial=model_to_dict(recipe))
+        ingredients_formset = IngredientsFormSet(initial=ingredients)
+        context = {
+            'recipe_form': recipe_form,
+            'ingredients_formset': ingredients_formset
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        recipe = self.get_object()
+        form = RecipeForm(request.POST or None, instance=recipe)
+        if form.is_valid():
+            form.save()
+
+        i = 0
+        while i < extra:
+            ingredient = request.POST.get(
+                f'recipeingredients_set-{i}-ingredient')
+            amount = request.POST.get(f'recipeingredients_set-{i}-amount')
+            unit = request.POST.get(f'recipeingredients_set-{i}-unit')
+            _id = request.POST.get(f'recipeingredients_set-{i}-id')
+            is_delete_on = request.POST.get(
+                f'recipeingredients_set-{i}-DELETE')
+
+            if ingredient:
+                ingredient = int(ingredient)
+                amount = float(amount) if amount else 0.0
+                unit = int(unit) if unit else None
+                if _id:
+                    _id = int(_id)
+                    _recipe_ingredient = RecipeIngredients.objects.get(pk=_id)
+
+                    if is_delete_on:
+                        _recipe_ingredient.delete()
+                    else:
+                        _recipe_ingredient.ingredient_id = ingredient
+                        _recipe_ingredient.amount = amount
+                        _recipe_ingredient.unit_id = unit
+                        _recipe_ingredient.save()
+                else:
+                    RecipeIngredients.objects.create(
+                        ingredient_id=ingredient,
+                        recipe=recipe,
+                        unit_id=unit,
+                        amount=amount
+                    )
             i += 1
 
         return HttpResponseRedirect(recipe.get_absolute_url())
