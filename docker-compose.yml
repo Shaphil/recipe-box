@@ -22,6 +22,12 @@ services:
       && gunicorn recipe_box.wsgi"
     environment:
       DJANGO_SUPERUSER_PASSWORD: 123456
+      SECRET_KEY: ${SECRET_KEY}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
     volumes:
       - .:/code
     ports:
