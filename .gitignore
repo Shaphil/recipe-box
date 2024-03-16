@@ -12,6 +12,7 @@ data/
 data/**
 static/
 staticfiles/
+*.db
 
 ### Django ###
 *.log
