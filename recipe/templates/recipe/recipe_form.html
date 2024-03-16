@@ -15,7 +15,7 @@
       {% if recipe %}
         Update {{ recipe.name }}
       {% else %}
-        Create New recipe
+        Create New Recipe
       {% endif %}
     </h1>
   </a>
@@ -31,15 +31,15 @@
       {% for hidden in ingredients_form.hidden_fields %}
         {{ hidden }}
       {% endfor %}
-      <hr>
     {% endfor %}
     {% for hidden_set in ingredients_formset.hidden_fields %}
-        {{ hidden_set }}
-      {% endfor %}
+      {{ hidden_set }}
+    {% endfor %}
     <input class="btn btn-outline-secondary" type="submit" value="Submit">
     <a href="{% url 'recipes-list' %}" class="btn btn-outline-danger">
       Cancel
     </a>
 
   </form>
+  <br>
 {% endblock %}
