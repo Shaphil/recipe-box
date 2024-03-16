@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'recipe_box.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'recipe_box',
+        'NAME': 'database.db',
     }
 }
 
