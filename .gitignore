@@ -10,7 +10,7 @@
 # Custom files and folders
 data/
 data/**
-static/
+# static/
 staticfiles/
 *.db
 
