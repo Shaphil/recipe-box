@@ -1,8 +1,8 @@
 databases:
   - name: andromeda
     plan: free
-    databaseName: recipe-box
-    user: recipe-box
+    databaseName: recipe_box_xjrd
+    user: root
 
 services:
   - type: web
